@@ -1,4 +1,4 @@
-# Pebble PC Template
+# Pebble PC Communication Example
 
 A lot of my apps for pebble have the same workflow:
 
