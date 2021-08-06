@@ -84,23 +84,23 @@ Currently:
 
 1. Can the hole process be done in the emulator?
 
-  Yes, the critical part is getting the port of the running emulator.
+   Yes, the critical part is getting the port of the running emulator.
 
 1. How reliable does the upload work?
 
-  1 of 5 times the upload works.
+   1 of 5 times the upload works.
 
 1. Can debugging be activated during the upload?
 
-  This does not work with the watch because both connections use the same port. It is working with the emulator.
+   This does not work with the watch because both connections use the same port. It is working with the emulator.
 
 1. How reliable does the download work?
 
-  Because *Data-Logging* is used, it works every time.
+   Because *Data-Logging* is used, it works every time.
 
 1. What is the best practice on storing records?
 
-  I have used a field to store the maximum number of records. And I am storing the records with an offset of 10.
+   I have used a field to store the maximum number of records. And I am storing the records with an offset of 10.
 
 ## Problems
 
