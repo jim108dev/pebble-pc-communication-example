@@ -78,7 +78,7 @@ Currently:
 
 ## Development
 
-1. The config for VSCode is inside `pebble_app/.vscode`. In order to have IntelliSense `pebble_app` must be add directly with `Add Folder to Workspace`.
+1. The config for VSCode is inside `pebble_app/.vscode`. In order to have IntelliSense `pebble_app` must be added directly with `Add Folder to Workspace`.
 
 ## Learning Questions
 
