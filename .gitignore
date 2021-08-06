@@ -9,6 +9,7 @@ __pycache__/
 .Python
 env/
 build/
+node_modules
 develop-eggs/
 dist/
 downloads/
@@ -62,3 +63,5 @@ pebble_app/build/
 # venv for testing
 venv/
 host_python/testing.ini
+
+data/download.csv

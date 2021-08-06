@@ -1,0 +1,32 @@
+{
+  "name": "pebble-pc-template",
+  "author": "MakeAwesomeHappen",
+  "version": "1.0.0",
+  "keywords": [
+    "pebble-app"
+  ],
+  "private": true,
+  "dependencies": {
+    "@smallstoneapps/data-processor": "^2.1.1",
+    "@smallstoneapps/utils": "^1.3.0",
+    "pebble-packet": "^1.3.2"
+  },
+  "pebble": {
+    "displayName": "pebble-pc-template",
+    "uuid": "ba78ca3f-8709-4765-adae-a55ccab1e701",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "aplite"
+    ],
+    "watchapp": {
+      "watchface": false
+    },
+    "messageKeys": [
+      "dummy"
+    ],
+    "resources": {
+      "media": []
+    }
+  }
+}
