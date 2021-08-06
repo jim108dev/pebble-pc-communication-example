@@ -1,5 +1,9 @@
 import argparse
+import json
 import logging
+import os
+import sys
+import tempfile
 import uuid
 
 import ConfigParser
@@ -96,9 +100,11 @@ class CommunicationKeeper:
 
 def open_connection(settings):
     if settings.transport == "websocket":
-        pebble = PebbleConnection(WebsocketTransport(
-            settings.device), log_packet_level=logging.DEBUG)
-    else:  # No elif, for compatibility with older configs
+        device = get_emulator_url(settings.device) if settings.device == "aplite" else settings.device
+        print("device = %s" % device)
+        pebble = PebbleConnection(WebsocketTransport(device), log_packet_level=logging.DEBUG)
+            
+    if settings.transport == "bluetooth":
         pebble = PebbleConnection(SerialTransport(
             settings.device), log_packet_level=logging.DEBUG)
     pebble.connect()
@@ -113,3 +119,29 @@ def open_connection(settings):
             logging.info("Pebble timeouted, retrying..")
             continue
     return pebble
+
+def get_emulator_url(device):
+    try:
+        e = json.load(open(tempfile.gettempdir()+"/pb-emulator.json"))
+        emul = e[device]
+    except IOError:
+        print("FileMsgBridge: Emu file not found (not running)")
+        exit()
+    except KeyError:
+        print("FileMsgBridge: Emu data not found (not running) : " + sys.argv[1])
+        exit()
+
+    emuvsn=emul.keys()[0]
+    pid=emul[emuvsn]['pypkjs']['pid']
+    port=emul[emuvsn]['pypkjs']['port']
+    if (not is_process_running(pid)):
+        print("FileMsgBridge: Emu process not found (not running) : " + sys.argv[1])
+        exit()
+    return "ws://localhost:"+str(port)
+
+def is_process_running(process_id):
+    try:
+        os.kill(process_id, 0)
+        return True
+    except OSError:
+        return False

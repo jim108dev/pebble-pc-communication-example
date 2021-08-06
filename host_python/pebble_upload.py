@@ -24,9 +24,6 @@ class PebbleConnectionException(Exception):
     pass
 
 
-logging.basicConfig(level=logging.DEBUG)
-
-
 def read_data():
     with open('data/upload.csv', 'r') as file:
         reader = csv.reader(file, delimiter=';', quoting=csv.QUOTE_NONE,

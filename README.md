@@ -42,59 +42,82 @@ Currently:
     deactivate
   ```
 
-1. Install on the emulator
+## Usage
+
+1. Run on the emulator
 
   ```sh
+  cd pebble_app
   pebble build && pebble install --logs --emulator aplite
+
+  # second terminal
+  # Activate venv
+  cd host_python
+  ./pebble_upload.py config_emu.ini
+
+  # Browse the emulator window
+  # Download the created data
+  ./pebble_download.py config_emu.ini
   ```
 
-1. Install on the device over bluetooth
+1. Run on the watch
 
   ```sh
-  # Enable bluetooth and pair the device
-  # Replace B0:B4:48:93:68:71 with your own device
-  bluetoothctl
-  scan on 
-  pair B0:B4:48:93:68:71
-  exit
-  # Open comm
-  sudo rfcomm bind 0 B0:B4:48:93:68:71 1
-  
   cd pebble_app
   pebble build && pebble install --serial /dev/rfcomm0
 
-## Usage
-
-1. Upload to the watch
-
-  ```sh
+  # second terminal
   # Activate venv
   cd host_python
-  ./pebble_upload.py config.ini
-  ```
+  ./pebble_upload.py config_watch.ini
 
-1. Download the data from the watch
-  
-  ```sh
-  cd ./host_python
-  ./pebble_download.py config.ini
+  # Browse the emulator window
+  # Download the created data
+  ./pebble_download.py config_watch.ini
   ```
 
 ## Development
 
-[STEPS-PEBBLE-PC-TEMPLATE.md](./STEPS-PEBBLE-PC-TEMPLATE.md) contains *Steps for Reproduction*.
+1. The config for VSCode is inside `pebble_app/.vscode`. In order to have IntelliSense `pebble_app` must be add directly with `Add Folder to Workspace`.
 
 ## Learning Questions
 
-### Can the hole process be done in the emulator?
+1. Can the hole process be done in the emulator?
 
-### How reliable does the upload work?
+  Yes, the critical part is getting the port of the running emulator.
 
-### Can debugging be activated during the upload?
+1. How reliable does the upload work?
 
-### How reliable does the download work?
+  1 of 5 times the upload works.
 
-### What is the best practice on storing records?
+1. Can debugging be activated during the upload?
+
+This does not work with the watch because both connections use the same port. It is working with the emulator.
+
+1. How reliable does the download work?
+
+Because *Data-Logging* is used, it works every time.
+
+1. What is the best practice on storing records?
+
+  I have used a field to store the maximum number of records. And I am storing the records with an offset of 10.
+
+## Problems
+
+1. The emulator does not show debug messages right away. Reproduce with:
+
+  ```sh
+  pebble new-project pebble-test
+  cd pebble-test
+  pebble build && pebble install --logs --emulator aplite
+  #Installing app...
+  #App install succeeded.
+  # no message
+
+  #<-Left arrow key, right arrow key->
+  #[18:18:59] ocess_manager.c:417> Heap Usage for App <pebble-tes: Total Size <23044B> Used <340B> Still allocated <24B>
+  #[18:19:01] pebble-test.c:65> Done initializing, pushed window: 0x2001a618
+  ```
 
 ## Used Packages
 
@@ -106,3 +129,4 @@ Currently:
 
 1. [Pebble Linux Remote](https://github.com/susundberg/pebble-linux-remote)
 1. [Pebble Modular App Example](https://github.com/pebble-examples/modular-app-example/)
+1. [AppMsgBridge](https://github.com/finebyte/AppMsgBridge)

@@ -11,6 +11,6 @@
 #define LOG_TAG 1
 #define TIMEOUT 30000 //1/2 minute
 
-void download_init(DownloadSuccessCallback success, DownloadLoggingCallback log, DownloadFailCallback fail);
+void download_init(DownloadSuccessCallback success, DownloadFailCallback fail);
 
 void download_deinit();

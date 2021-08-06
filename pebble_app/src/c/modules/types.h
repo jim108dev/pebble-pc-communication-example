@@ -12,7 +12,6 @@ typedef struct Record
 
 typedef void (*DownloadSuccessCallback)(Record records[], uint8_t max_records);
 typedef void (*DownloadFailCallback)(char message[MAX_TEXT_LEN]);
-typedef void (*DownloadLoggingCallback)(char message[MAX_TEXT_LEN]);
 
 typedef struct CurrentRecord
 {

@@ -116,11 +116,6 @@ static void on_download_success(Record *records, uint8_t max_records)
   show_summary();
 }
 
-static void on_download_log(char msg[MAX_TEXT_LEN])
-{
-  info_window_set_main(msg);
-}
-
 static void on_download_fail(char msg[MAX_TEXT_LEN])
 {
   info_window_set_main("Download failed. Please try 'pebble_upload.py' again or press select for demo mode");
@@ -137,7 +132,7 @@ static void init()
 
   if (appLaunchReason == APP_LAUNCH_PHONE)
   {
-    download_init(on_download_success, on_download_log, on_download_fail);
+    download_init(on_download_success, on_download_fail);
     // If app was launched by phone and close to last app is disabled, always exit to the watchface instead of to the menu
     exit_reason_set(APP_EXIT_ACTION_PERFORMED_SUCCESSFULLY);
   }
