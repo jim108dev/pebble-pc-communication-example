@@ -92,11 +92,11 @@ Currently:
 
 1. Can debugging be activated during the upload?
 
-This does not work with the watch because both connections use the same port. It is working with the emulator.
+  This does not work with the watch because both connections use the same port. It is working with the emulator.
 
 1. How reliable does the download work?
 
-Because *Data-Logging* is used, it works every time.
+  Because *Data-Logging* is used, it works every time.
 
 1. What is the best practice on storing records?
 
