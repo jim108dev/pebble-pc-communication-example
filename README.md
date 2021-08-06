@@ -12,9 +12,9 @@ This is a learning project in order to set this process up correctly, so that it
 Currently:
 
 1. The data is read from csv in form of a string and a time values and send via a Python script.
-1. The demo app receives them, stores them, display a summary.
+1. The demo app receives them via *AppMessage*, stores them.
 1. It can display the data.
-1. It updates the time and sends it back.
+1. It updates the time and sends it back via *Data-Logging*.
 1. The data is received and stored to csv via a Python script.
 
 ## Install
@@ -82,23 +82,23 @@ Currently:
 
 ## Learning Questions
 
-1. Can the hole process be done in the emulator?
+### Can the hole process be done in the emulator?
 
    Yes, the critical part is getting the port of the running emulator.
 
-1. How reliable does the upload work?
+### How reliable does the upload work?
 
    1 of 5 times the upload works.
 
-1. Can debugging be activated during the upload?
+### Can debugging be activated during the upload?
 
    This does not work with the watch because both connections use the same port. It is working with the emulator.
 
-1. How reliable does the download work?
+### How reliable does the download work?
 
    Because *Data-Logging* is used, it works every time.
 
-1. What is the best practice on storing records?
+### What is the best practice on storing records?
 
    I have used a field to store the maximum number of records. And I am storing the records with an offset of 10.
 
