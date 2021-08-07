@@ -1,6 +1,6 @@
 #include "dlog.h"
 #include "types.h"
-#include <@smallstoneapps/utils/macros.h>
+#include "util.h"
 
 static DataLoggingSessionRef s_session_ref = NULL;
 

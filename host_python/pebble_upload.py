@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 """
- Simple looper to receive messages from pebble.
- Modified from https://github.com/susundberg/pebble-linux-remote 
- original author: Pauli Salmenrinne (License  GPL-2.0)
+ Simple looper to send messages to pebble.
+ Modified from https://github.com/susundberg/pebble-linux-remote.
+ Original author: Pauli Salmenrinne (License  GPL-2.0)
 """
 
 import csv
@@ -15,7 +15,7 @@ from libpebble2.protocol.apps import AppRunState, AppRunStateStart
 from libpebble2.services.appmessage import AppMessageService, CString, Uint8
 
 from pebble_comm import (CommunicationKeeper, PebbleConnectionException,
-                         get_settings, open_connection)
+                         get_conf, open_connection)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -24,8 +24,8 @@ class PebbleConnectionException(Exception):
     pass
 
 
-def read_data():
-    with open('data/upload.csv', 'r') as file:
+def read_data(filename):
+    with open(filename, 'r') as file:
         reader = csv.reader(file, delimiter=';', quoting=csv.QUOTE_NONE,
                             skipinitialspace=True)
         next(reader, None) #header row
@@ -36,22 +36,22 @@ COMMUNICATION_KEY_MAX = 100
 COMMUNICATION_KEY_DATA = 200
 
 
-def main(settings):
-    data = read_data()
+def main(conf):
+    data = read_data(conf.upload_filename)
 
-    pebble = open_connection(settings)
+    pebble = open_connection(conf)
 
     # Register service for app messages
     appservice = AppMessageService(pebble)
 
-    commwatch = CommunicationKeeper(settings, appservice)
+    commwatch = CommunicationKeeper(conf, appservice)
     appservice.register_handler("nack", commwatch.nack_received)
     appservice.register_handler("ack", commwatch.ack_received)
 
     # Start the watchapp
-    logging.debug("Send uuid=%s", settings.uuid)
+    logging.debug("Send uuid=%s", conf.uuid)
     pebble.send_packet(AppRunState(
-        command=0x01, data=AppRunStateStart(uuid=uuid.UUID(settings.uuid))))
+        command=0x01, data=AppRunStateStart(uuid=uuid.UUID(conf.uuid))))
 
     commwatch.send_message({COMMUNICATION_KEY_MAX: Uint8(len(data))})
 
@@ -73,7 +73,7 @@ def main(settings):
 
 if __name__ == "__main__":
     try:
-        main(get_settings())
+        main(get_conf())
     except PebbleConnectionException as error:
         logging.error("PebbleConnectionException: " + str(error))
         logging.error("Bailing out!")

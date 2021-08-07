@@ -1,13 +1,12 @@
 #include "main.h"
-#include "time.h"
 
 static CurrentRecord *s_current = NULL;
 static Record *s_record = NULL;
 
 static void garbage_collection()
 {
-  free_safe(s_current);
-  free_safe(s_record);
+  FREE_SAFE(s_current);
+  FREE_SAFE(s_record);
 }
 
 static void start_process_item(uint8_t num, uint8_t max)
@@ -15,7 +14,7 @@ static void start_process_item(uint8_t num, uint8_t max)
   s_record = malloc(sizeof(Record));
   pers_read_single(num, s_record);
 
-  debug_record("start_process_item", *s_record);
+  DEBUG_RECORD(*s_record);
 
   s_current = malloc(sizeof(CurrentRecord));
   s_current->record = s_record;
@@ -29,7 +28,7 @@ static void on_finish_record(void *data)
 {
   CurrentRecord *current = (CurrentRecord *)data;
 
-  debug_record("on_finish_record", *current->record);
+  DEBUG_RECORD(*current->record);
 
   current->record->last_displayed = time(NULL);
 
@@ -66,7 +65,7 @@ static void on_show_text(void *data)
 {
   CurrentRecord *current = (CurrentRecord *)data;
 
-  debug_record("on_show_text", *current->record);
+  DEBUG_RECORD(*current->record);
 
   InfoConfig c;
   c.action = on_finish_record;

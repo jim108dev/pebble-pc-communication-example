@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+
+"""
+ Helper classes to establish a connection to pebble.
+ Modified from https://github.com/susundberg/pebble-linux-remote.
+ Original author: Pauli Salmenrinne (License  GPL-2.0)
+"""
+
 import argparse
 import json
 import logging
@@ -17,21 +25,29 @@ class PebbleConnectionException(Exception):
     pass
 
 
-def get_settings():
+def get_conf():
     parser = argparse.ArgumentParser(
         description='Pebble to linux keyboard bridge')
     parser.add_argument("config", help="Set the configuration file")
-    settings = parser.parse_args()
+    conf = parser.parse_args()
 
-    conf = ConfigParser.ConfigParser()
-    conf.read(settings.config)
+    parser = ConfigParser.ConfigParser()
+    parser.read(conf.config)
 
-    settings.transport = conf.get('main', 'transport')
-    settings.device = conf.get('main', 'device')
-    settings.uuid = conf.get('main', 'uuid')
+    conf.transport = parser.get('main', 'transport')
+    conf.device = parser.get('main', 'device')
+    conf.uuid = parser.get('main', 'uuid')
 
-    settings.key_mappings = {}
-    return settings
+    conf.upload_filename = parser.get('upload', 'filename')
+
+    conf.download_filename = parser.get('download', 'filename')
+    conf.download_record_fmt = parser.get('download', 'record_fmt')
+    conf.download_record_size = parser.getint('download', 'record_size')
+    conf.download_header = parser.get('download', 'header').strip('"').split(';')
+    conf.download_log_tag = parser.getint('download', 'log_tag')
+
+    conf.key_mappings = {}
+    return conf
 
 
 class CommandHandler:

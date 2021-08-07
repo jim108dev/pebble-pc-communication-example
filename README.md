@@ -7,7 +7,7 @@ A lot of my apps for pebble have the same workflow:
 1. At a later stage, display the data and gather feedback.
 1. At a later stage, send the data back to the pc.
 
-This is a learning project in order to set this process up correctly, so that it can be used as a template for other apps.
+This is a learning project in order to set this process up in the most reliable way, so that it can be used as a template for other apps.
 
 Currently:
 

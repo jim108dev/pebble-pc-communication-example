@@ -1,8 +1,8 @@
 #pragma once
 
 #include <pebble.h>
-#include <@smallstoneapps/utils/macros.h>
 #include "../modules/types.h"
+#include "../modules/util.h"
 
 typedef void(DoneCallback)(void *data);
 

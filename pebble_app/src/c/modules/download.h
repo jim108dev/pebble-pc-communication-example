@@ -1,6 +1,10 @@
 #pragma once // Prevent errors from being included multiple times
 
 #include <pebble.h>
+#include <@smallstoneapps/data-processor/data-processor.h>
+#include <pebble-packet/pebble-packet.h>
+#include <pebble-events/pebble-events.h>
+#include "util.h"
 #include "types.h"
 
 #define NUM_ITEMS_PER_MESSAGE 5

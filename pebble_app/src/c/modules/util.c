@@ -1,10 +1,10 @@
 #include "util.h"
 
-void debug_record(char prefix[], Record r)
+void record_to_string(char buf[MAX_TEXT_LEN], Record r)
 {
-    char buf[MAX_TEXT_LEN];
-    time_to_string(buf, r.last_displayed);
-    DEBUG("%s: (%d;%s;%s)", prefix, r.id, r.text, buf);
+    char time_buf[MAX_TEXT_LEN];
+    time_to_string(time_buf, r.last_displayed);
+    snprintf(buf, MAX_TEXT_LEN, "Record (%d;'%s';%s)", r.id, r.text, time_buf);
 }
 
 void time_to_string(char buf[MAX_TEXT_LEN], time_t rawtime)

@@ -1,6 +1,7 @@
 #pragma once // Prevent errors from being included multiple times
 
-#include <pebble.h>
+#include <pebble.h> // Pebble SDK symbols
+
 #define MAX_TEXT_LEN 100
 
 typedef struct Record

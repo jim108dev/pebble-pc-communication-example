@@ -2,6 +2,7 @@
 
 #include <pebble.h>
 #include "types.h"
+#include "util.h"
 
 //private
 #define LOG_TAG 1

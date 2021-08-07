@@ -1,8 +1,9 @@
 #pragma once // Prevent errors from being included multiple times
 
 #include <pebble.h> // Pebble SDK symbols
-#include <@smallstoneapps/utils/macros.h>
 #include "types.h"
+#include "util.h"
+
 #define RECORDS_OFFSET 10
 #define MAX_RECORDS_KEY 0
 #define UPLOADED_DATE_KEY 1

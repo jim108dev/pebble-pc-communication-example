@@ -1,10 +1,4 @@
 #include "download.h"
-#include "types.h"
-#include <@smallstoneapps/data-processor/data-processor.h>
-#include <@smallstoneapps/utils/macros.h>
-#include <pebble-packet/pebble-packet.h>
-#include <pebble-events/pebble-events.h>
-#include "util.h"
 
 static DownloadSuccessCallback s_success;
 static DownloadFailCallback s_fail;

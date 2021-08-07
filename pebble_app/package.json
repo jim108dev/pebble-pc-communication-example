@@ -8,7 +8,6 @@
   "private": true,
   "dependencies": {
     "@smallstoneapps/data-processor": "^2.1.1",
-    "@smallstoneapps/utils": "^1.3.0",
     "pebble-packet": "^1.3.2"
   },
   "pebble": {

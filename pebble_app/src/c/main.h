@@ -1,12 +1,14 @@
-#include <pebble.h>
+#pragma once // Prevent errors from being included multiple times
 
+#include <pebble.h>
+#include "time.h"
+
+#include "modules/types.h"
+#include "modules/util.h"
 #include "modules/download.h"
 #include "modules/dlog.h"
 #include "modules/pers.h"
-#include "modules/types.h"
-#include "modules/util.h"
 #include "windows/info_window.h"
-#include <@smallstoneapps/utils/macros.h>
 
 static void garbage_collection();
 static void on_finish_record(void *data);
