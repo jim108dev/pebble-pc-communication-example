@@ -58,7 +58,7 @@ def main(conf):
     commwatch.send_message({COMMUNICATION_KEY_MAX: Uint8(len(data))})
 
     for row in data:
-        if len(row) >= MAX_ROW_LEN:
+        if len(row) > MAX_ROW_LEN:
             logging.warn("Entry is longer than %d, ignoring '%s'" % (MAX_ROW_LEN, row))
             continue
         commwatch.send_message({COMMUNICATION_KEY_DATA: CString(row)})
