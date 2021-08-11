@@ -62,6 +62,5 @@ pebble_app/build/
 
 # venv for testing
 venv/
-host_python/testing.ini
 
 data/download.csv

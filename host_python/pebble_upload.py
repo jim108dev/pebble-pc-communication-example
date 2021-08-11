@@ -14,8 +14,9 @@ import uuid
 from libpebble2.protocol.apps import AppRunState, AppRunStateStart
 from libpebble2.services.appmessage import AppMessageService, CString, Uint8
 
-from pebble_comm import (CommunicationKeeper, PebbleConnectionException,
-                         get_conf, open_connection)
+from pebble_communication import (CommunicationKeeper,
+                                  PebbleConnectionException, get_conf,
+                                  open_connection)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -32,6 +33,7 @@ def read_data(filename):
         return [';'.join(cols) for cols in reader]
 
 
+MAX_ROW_LEN = 255
 COMMUNICATION_KEY_MAX = 100
 COMMUNICATION_KEY_DATA = 200
 
@@ -56,6 +58,9 @@ def main(conf):
     commwatch.send_message({COMMUNICATION_KEY_MAX: Uint8(len(data))})
 
     for row in data:
+        if len(row) >= MAX_ROW_LEN:
+            logging.warn("Entry is longer than %d, ignoring '%s'" % (MAX_ROW_LEN, row))
+            continue
         commwatch.send_message({COMMUNICATION_KEY_DATA: CString(row)})
 
     # Wait for all

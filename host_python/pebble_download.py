@@ -11,8 +11,9 @@ import uuid
 
 from libpebble2.services.data_logging import DataLoggingService
 
-from pebble_comm import (CommunicationKeeper, PebbleConnectionException,
-                         get_conf, open_connection)
+from pebble_communication import (CommunicationKeeper,
+                                  PebbleConnectionException, get_conf,
+                                  open_connection)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -45,6 +46,7 @@ def main(conf):
 
         data = appservice.download(session_id)
         # (DataLoggingDespoolOpenSession, bytearray)
+        logging.debug(data)
         (_, byte_values) = data
         for r in bytes_to_records(byte_values, conf.download_record_size, conf.download_record_fmt):
             records.append(r)
